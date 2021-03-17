@@ -1,12 +1,45 @@
 // imports
 const express = require('express');
 const cors = require('cors');
+const Pusher = require("pusher");
+const db = require('./db/db')
 require('./db/db')
 require('dotenv').config();
 
 // app config
 
 const app = express();
+
+const pusher = new Pusher({
+    appId: process.env.pusherAppID,
+    key: process.env.pusherKey,
+    secret: process.env.pusherSecret,
+    cluster: "Chats",
+    useTLS: true
+});
+
+// db config
+
+db.once('open',()=>{
+    
+    const messageCollection = db.collection('chats');
+    const changeStream = messageCollection.watch();
+    
+    changeStream.on('change', (change)=>{
+        console.log(change);
+
+        if(change.operationType === 'insert'){
+            const messageDetails = change.fullDocument;
+            pusher.trigger("messages", "inserted", {
+                name: messageDetails.name,
+                chats : messageDetails.chats,
+                received : messageDetails.received
+            });
+        }else{
+            console.log("There was a problem triggering pusher")
+        }
+    })
+})
 
 // middlewares
 

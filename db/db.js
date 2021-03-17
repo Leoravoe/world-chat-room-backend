@@ -13,3 +13,4 @@ mongoose.connect(dbURI,{ useNewUrlParser: true, useUnifiedTopology: true, useCre
         console.log(err)
     });
 
+module.exports = mongoose.connection
