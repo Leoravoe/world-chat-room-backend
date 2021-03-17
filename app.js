@@ -14,7 +14,7 @@ const pusher = new Pusher({
     appId: process.env.pusherAppID,
     key: process.env.pusherKey,
     secret: process.env.pusherSecret,
-    cluster: "Chats",
+    cluster: "mt1",
     useTLS: true
 });
 
