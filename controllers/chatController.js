@@ -11,3 +11,11 @@ module.exports.chat = async (req,res) => {
     }
 
 }
+module.exports.chatget = async (req, res)=>{
+    try {
+        const message = await Chat.find();
+        res.status(200).json(message);
+    } catch (error) {
+        res.status(404).json(error);
+    }
+}
