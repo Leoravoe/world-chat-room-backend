@@ -29,3 +29,4 @@ app.get('/',(req, res)=>{
     res.send("Hello I am on !!")
 })
 
+app.use('/message', require('./routes/chatRoutes'));
