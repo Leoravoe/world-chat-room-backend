@@ -1,6 +1,7 @@
 // imports
 const express = require('express');
 const cors = require('cors');
+require('./db/db')
 require('dotenv').config();
 
 // app config
