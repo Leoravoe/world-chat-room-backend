@@ -11,9 +11,9 @@ require('dotenv').config();
 const app = express();
 
 const pusher = new Pusher({
-    appId: process.env.pusherAppID,
-    key: process.env.pusherKey,
-    secret: process.env.pusherSecret,
+    appId: process.env.PUSHERAPPID,
+    key: process.env.PUSHERKEY,
+    secret: process.env.PUSHERSECRET,
     cluster: "mt1",
     useTLS: true
 });
